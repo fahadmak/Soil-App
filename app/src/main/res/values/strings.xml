@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">Bujimu App</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="records">Records</string>
-    <string name="app_label">Bujimu</string>
-</resources>
