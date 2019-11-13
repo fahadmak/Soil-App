@@ -1,5 +1,6 @@
 package com.example.bujimuapp.ui.dashboard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +14,10 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 
 import com.example.bujimuapp.R;
+import com.example.bujimuapp.SoilAnalysisActivity;
 
 public class DashboardFragment extends Fragment {
 
@@ -43,4 +46,16 @@ public class DashboardFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        view.findViewById(R.id.cardView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SoilAnalysisActivity.class);
+                startActivity(intent);
+            }
+        });
+
+    }
 }
