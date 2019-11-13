@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/soil_analysis_navigation"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/farmInfo">
+
+    <fragment
+        android:id="@+id/farmInfo"
+        android:name="com.example.bujimuapp.FarmInfoFragment"
+        tools:layout="@layout/fragment_farm_info"
+        android:label="fragment_farm_info">
+        <action
+            android:id="@+id/action_farmInfo_to_siteInfo3"
+            app:destination="@id/siteInfo3" />
+    </fragment>
+    <fragment
+        android:id="@+id/siteInfo3"
+        android:name="com.example.bujimuapp.SiteInfoFragment"
+        tools:layout="@layout/fragment_site_info2"
+        android:label="fragment_site_info2">
+        <action
+            android:id="@+id/action_siteInfo3_to_siteHistory"
+            app:destination="@id/siteHistory" />
+        <argument
+            android:name="farmInfo"
+            app:argType="com.example.bujimuapp.models.FarmInfo" />
+    </fragment>
+    <fragment
+        android:id="@+id/siteHistory"
+        android:name="com.example.bujimuapp.SiteHistoryFragment"
+        tools:layout="@layout/fragment_site_history"
+        android:label="fragment_site_history">
+        <action
+            android:id="@+id/action_siteHistory_to_soilAnalysis"
+            app:destination="@id/soilAnalysis" />
+    </fragment>
+    <fragment
+        android:id="@+id/soilAnalysis"
+        android:name="com.example.bujimuapp.SoilAnalysisFragment"
+        tools:layout="@layout/fragment_soil_analysis"
+        android:label="fragment_soil_analysis">
+        <action
+            android:id="@+id/action_soilAnalysis_to_navigation_dashboard"
+            app:popUpTo="@+id/navigation_dashboard" />
+    </fragment>
+</navigation>
