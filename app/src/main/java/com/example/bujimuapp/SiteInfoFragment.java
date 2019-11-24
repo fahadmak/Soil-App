@@ -277,8 +277,8 @@ public class SiteInfoFragment extends Fragment implements View.OnClickListener {
         final NavController controller = Navigation.findNavController(view);
         SiteInfo siteInfo = new SiteInfo(info, area, location, slopeNature, soilNature, degrade,
                 antHill, footPath, tree, currentCover, cropType, vegCover, dominantCover);
-        SiteInfoFragmentDirections.ActionSiteInfo3ToSiteHistory
-                actions = SiteInfoFragmentDirections.actionSiteInfo3ToSiteHistory(siteInfo);
+        SiteInfoFragmentDirections.ActionSiteInfo3ToSoilAnalysis2
+                actions = SiteInfoFragmentDirections.actionSiteInfo3ToSoilAnalysis2(siteInfo);
         controller.navigate(actions);
     }
 }

@@ -18,21 +18,18 @@
         android:name="com.example.bujimuapp.SiteInfoFragment"
         tools:layout="@layout/fragment_site_info2"
         android:label="fragment_site_info2">
-        <action
-            android:id="@+id/action_siteInfo3_to_siteHistory"
-            app:destination="@id/siteHistory" />
         <argument
             android:name="farmInfo"
             app:argType="com.example.bujimuapp.models.FarmInfo" />
+        <action
+            android:id="@+id/action_siteInfo3_to_soilAnalysis2"
+            app:destination="@id/soilAnalysis" />
     </fragment>
     <fragment
         android:id="@+id/siteHistory"
         android:name="com.example.bujimuapp.SiteHistoryFragment"
         tools:layout="@layout/fragment_site_history"
         android:label="fragment_site_history">
-        <action
-            android:id="@+id/action_siteHistory_to_soilAnalysis"
-            app:destination="@id/soilAnalysis" />
         <argument
             android:name="site info"
             app:argType="com.example.bujimuapp.models.SiteInfo" />
@@ -45,5 +42,8 @@
         <action
             android:id="@+id/action_soilAnalysis_to_navigation_dashboard"
             app:popUpTo="@+id/navigation_dashboard" />
+        <argument
+            android:name="site info"
+            app:argType="com.example.bujimuapp.models.SiteInfo" />
     </fragment>
 </navigation>
