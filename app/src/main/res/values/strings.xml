@@ -16,6 +16,9 @@
     <string name="farm_history">Farm History</string>
     <string name="dominant_cover">Dominant Cover</string>
     <string name="vegetation_cover">Vegetation cover</string>
+    <string name="soil_analysis">Soil Analysis</string>
+    <string name="crops_to_be_grown">Crop to be grown</string>
+    <string name="soil_tests">Soil Tests - Click to carry out tests</string>
 
     <string-array name="sample_area">
         <item>0.5 – 1.0</item>
@@ -89,5 +92,10 @@
         <item>Commelina africana</item>
         <item>Impereta Cylindrica</item>
         <item>Biden pilosa</item>
+    </string-array>
+
+    <string-array name="crop_names">
+        <item>Maize</item>
+        <item>Beans</item>
     </string-array>
 </resources>
