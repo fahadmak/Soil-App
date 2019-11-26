@@ -41,7 +41,6 @@ public class SiteHistoryFragment extends Fragment {
         if (getArguments() != null) {
             SiteHistoryFragmentArgs args = SiteHistoryFragmentArgs.fromBundle(getArguments());
             SiteInfo info = args.getSiteInfo();
-            Log.d(TAG, "onViewCreated: " + info.getInfo().getName());
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.example.bujimuapp;
 
-class AppConfig {
+public class AppConfig {
     public static final int NITROGEN_COLOR_CODE = 2;
     public static final String NITROGEN_COLOR_EXTRA = "nitrogen";
     public static final String COLOR_GREEN = "green";

@@ -5,7 +5,12 @@ import android.os.Parcelable;
 
 public class SiteInfo implements Parcelable {
 
-    private FarmInfo info;
+    String name;
+    String district;
+    String subCounty;
+    String parish;
+    String vilage;
+    String reason;
     private String area;
     private String location;
     private String slopeNature;
@@ -19,11 +24,16 @@ public class SiteInfo implements Parcelable {
     private String vegCover;
     private String dominantCover;
 
-    public SiteInfo(FarmInfo info, String area, String location, String slopeNature,
-                    String soilNature, String degrade, String antHill, String footPath,
-                    String tree, String currentCover, String cropType, String vegCover,
-                    String dominantCover) {
-        this.info = info;
+    public SiteInfo(String name, String district, String subCounty, String parish, String vilage,
+                    String reason, String area, String location, String slopeNature,
+                    String soilNature, String degrade, String antHill, String footPath, String tree,
+                    String currentCover, String cropType, String vegCover, String dominantCover) {
+        this.name = name;
+        this.district = district;
+        this.subCounty = subCounty;
+        this.parish = parish;
+        this.vilage = vilage;
+        this.reason = reason;
         this.area = area;
         this.location = location;
         this.slopeNature = slopeNature;
@@ -39,7 +49,12 @@ public class SiteInfo implements Parcelable {
     }
 
     protected SiteInfo(Parcel in) {
-        this.info = in.readParcelable(FarmInfo.class.getClassLoader());
+        this.name = in.readString();
+        this.district = in.readString();
+        this.subCounty = in.readString();
+        this.parish = in.readString();
+        this.vilage = in.readString();
+        this.reason = in.readString();
         this.area = in.readString();
         this.location = in.readString();
         this.slopeNature = in.readString();
@@ -74,7 +89,12 @@ public class SiteInfo implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable(info, flags);
+        dest.writeString(name);
+        dest.writeString(district);
+        dest.writeString(subCounty);
+        dest.writeString(parish);
+        dest.writeString(vilage);
+        dest.writeString(reason);
         dest.writeString(area);
         dest.writeString(location);
         dest.writeString(slopeNature);
@@ -89,8 +109,28 @@ public class SiteInfo implements Parcelable {
         dest.writeString(dominantCover);
     }
 
-    public FarmInfo getInfo() {
-        return info;
+    public String getName() {
+        return name;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public String getSubCounty() {
+        return subCounty;
+    }
+
+    public String getParish() {
+        return parish;
+    }
+
+    public String getVilage() {
+        return vilage;
+    }
+
+    public String getReason() {
+        return reason;
     }
 
     public String getArea() {

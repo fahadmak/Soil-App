@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,8 +17,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.bujimuapp.models.SiteInfo;
+import com.example.bujimuapp.models.SoilAnalysis;
+
+import java.util.Date;
 
 
 /**
@@ -33,6 +41,11 @@ public class SoilAnalysisFragment extends Fragment {
     private TextView nitrogenText;
     private TextView phosphorousText;
     private TextView phText;
+    private Button recommendationButton;
+    private SoilAnalysis soilAnalysis;
+    private SiteInfo siteInfo;
+
+    private SoilAnalysisViewModel soilAnalysisViewModel;
 
     static final int COLOR_REQUEST_CODE = 1;  // The request code
 
@@ -52,6 +65,11 @@ public class SoilAnalysisFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        if (getArguments() != null) {
+            SoilAnalysisFragmentArgs args = SoilAnalysisFragmentArgs.fromBundle(getArguments());
+            siteInfo = args.getSiteInfo();
+        }
+        soilAnalysisViewModel = ViewModelProviders.of(requireActivity()).get(SoilAnalysisViewModel.class);
         Spinner cropSpinner = view.findViewById(R.id.crop_grown);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(getActivity(), R.array.crop_names,
                 R.layout.spinner_item);
@@ -119,6 +137,17 @@ public class SoilAnalysisFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), PhCameraActivity.class);
                 startActivityForResult(intent, COLOR_REQUEST_CODE);
+            }
+        });
+        recommendationButton = view.findViewById(R.id.recommend);
+
+        recommendationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                soilAnalysis = new SoilAnalysis(0, siteInfo, cropName,
+                        "fruits", new Date());
+                soilAnalysisViewModel.insert(soilAnalysis);
+                Toast.makeText(getActivity(), "inserted by", Toast.LENGTH_SHORT).show();
             }
         });
     }

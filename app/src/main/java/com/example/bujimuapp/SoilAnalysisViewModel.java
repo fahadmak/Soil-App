@@ -1,28 +1,27 @@
-package com.example.bujimuapp.ui.home;
+package com.example.bujimuapp;
 
 import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.bujimuapp.SoilAnalysisRepository;
 import com.example.bujimuapp.models.SoilAnalysis;
 
 import java.util.List;
 
-public class HomeViewModel extends AndroidViewModel {
+public class SoilAnalysisViewModel extends AndroidViewModel {
 
     private SoilAnalysisRepository mRepository;
 
     private LiveData<List<SoilAnalysis>> mAllSoilAnalysis;
 
-    public HomeViewModel(Application application) {
+    public SoilAnalysisViewModel(Application application) {
         super(application);
         mRepository = new SoilAnalysisRepository(application);
         mAllSoilAnalysis = mRepository.getAllSoilAnalysis();
     }
 
-    LiveData<List<SoilAnalysis>> getAllSoilAnalysis() {
-        return mAllSoilAnalysis;
+    public void insert(SoilAnalysis soilAnalysis) {
+        mRepository.insert(soilAnalysis);
     }
 }

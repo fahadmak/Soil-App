@@ -23,6 +23,7 @@
     <string name="save_recommendation">Save Recommendation</string>
     <string name="organic_matter">Organic Matter</string>
     <string name="ph">PH</string>
+    <string name="crop">Beans</string>
 
     <string-array name="sample_area">
         <item>0.5 – 1.0</item>
