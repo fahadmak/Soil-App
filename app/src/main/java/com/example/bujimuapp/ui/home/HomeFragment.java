@@ -1,18 +1,23 @@
 package com.example.bujimuapp.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bujimuapp.R;
+import com.example.bujimuapp.SoilAnalysisViewModel;
+import com.example.bujimuapp.models.SoilAnalysis;
+
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
@@ -20,14 +25,18 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(this, new Observer<String>() {
+        RecyclerView recyclerView = root.findViewById(R.id.recyclerview);
+        final SoilAnalysisListAdapter adapter = new SoilAnalysisListAdapter(getActivity());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        homeViewModel =
+                ViewModelProviders.of(requireActivity()).get(HomeViewModel.class);
+        homeViewModel.getAllSoilAnalysis().observe(this, new Observer<List<SoilAnalysis>>() {
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+            public void onChanged(List<SoilAnalysis> soilAnalyses) {
+                adapter.setSoilAnalysisList(soilAnalyses);
+                Log.d("Soil Analysis", "onChanged: " + soilAnalyses);
             }
         });
         return root;
