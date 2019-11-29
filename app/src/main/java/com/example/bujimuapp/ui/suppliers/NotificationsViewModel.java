@@ -1,4 +1,4 @@
-package com.example.bujimuapp.ui.notifications;
+package com.example.bujimuapp.ui.suppliers;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

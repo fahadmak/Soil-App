@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/records"
-        android:name="com.example.bujimuapp.ui.notifications.NotificationsFragment"
+        android:name="com.example.bujimuapp.ui.suppliers.SuppliersFragment"
         android:label="@string/records"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_suppliers" />
 </navigation>

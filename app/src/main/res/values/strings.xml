@@ -24,6 +24,24 @@
     <string name="organic_matter">Organic Matter</string>
     <string name="ph">PH</string>
     <string name="crop">Beans</string>
+    <string name="agronomic_information">Agronomic Information</string>
+    <string name="_30_days">\@ 30 days</string>
+    <string name="_45_days">\@ 45 days</string>
+    <string name="forliar">Forliar</string>
+    <string name="super_green">Super Green</string>
+    <string name="u25ba_fertile">► Fertile</string>
+    <string name="u25ba_deep">► Deep</string>
+    <string name="npk">NPK</string>
+    <string name="top_dressing">Top Dressing</string>
+    <string name="urea">UREA</string>
+    <string name="planting">\@ Planting</string>
+    <string name="basal">Basal</string>
+    <string name="dap">DAP</string>
+    <string name="allwin">Allwin</string>
+    <string name="u25ba_loose_to_tightly_compact_soils">► Loose to tightly compact soils</string>
+    <string name="available_fertilizers"><u>Available Fertilizers</u></string>
+    <string name="unit_price_50_kg"><u>Unit price @ 50 kg</u></string>
+    <string name="_150_000_ugx">150,000 UGX</string>
 
     <string-array name="sample_area">
         <item>0.5 – 1.0</item>
@@ -108,5 +126,11 @@
         <item>0 – 5 seconds (Low)</item>
         <item>5 – 10 seconds (Medium)</item>
         <item>Greater than 10 seconds (High)</item>
+    </string-array>
+
+    <string-array name="fertilizer_levels">
+        <item>Deep</item>
+        <item>Fertilizer</item>
+        <item>Loose to tightly compact soils</item>
     </string-array>
 </resources>

@@ -147,7 +147,9 @@ public class SoilAnalysisFragment extends Fragment {
                 soilAnalysis = new SoilAnalysis(0, siteInfo, cropName,
                         "fruits", new Date());
                 soilAnalysisViewModel.insert(soilAnalysis);
-                Toast.makeText(getActivity(), "inserted by", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Analysis Saved", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
             }
         });
     }
