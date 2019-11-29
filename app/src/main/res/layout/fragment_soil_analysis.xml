@@ -55,7 +55,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView8">
 
         <Spinner
-            style="@style/Widget.AppCompat.DropDownItem.Spinner"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
             android:layout_width="0dp"
             android:id="@+id/crop_grown"
             android:layout_height="wrap_content"
@@ -240,7 +240,7 @@
         app:layout_constraintTop_toBottomOf="@+id/organic_text">
 
         <Spinner
-            style="@style/Widget.AppCompat.DropDownItem.Spinner"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
             android:layout_width="0dp"
             android:id="@+id/organic_spinner"
             android:layout_height="wrap_content"
@@ -248,7 +248,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/preview" />
+            tools:listitem="@layout/preview"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button

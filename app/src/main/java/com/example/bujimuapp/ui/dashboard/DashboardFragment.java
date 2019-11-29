@@ -15,6 +15,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.bujimuapp.BeanAgroActivity;
+import com.example.bujimuapp.MaizeAgroActivity;
 import com.example.bujimuapp.R;
 import com.example.bujimuapp.SoilAnalysisActivity;
 
@@ -46,6 +48,22 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), SoilAnalysisActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        view.findViewById(R.id.bean_card_view).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), BeanAgroActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        view.findViewById(R.id.maize_card_view).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MaizeAgroActivity.class);
                 startActivity(intent);
             }
         });
