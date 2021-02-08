@@ -1,9 +1,5 @@
 package com.example.bujimuapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -35,14 +31,25 @@ import android.view.TextureView;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.example.bujimuapp.AppConfig.PHOSPHOROUS_REC;
+import static com.example.bujimuapp.AppConfig.PHOSPHOROUS_STATE;
+import static com.example.bujimuapp.AppConfig.adequatePhosphorous;
 
 
 public class PhosphorousCameraActivity extends AppCompatActivity {
+
 
     private static final int REQUEST_CAMERA_PERMISSION_RESULT = 0;
     private static final int STATE_PREVIEW = 0;
@@ -82,19 +89,51 @@ public class PhosphorousCameraActivity extends AppCompatActivity {
 
         @Override
         public void onSurfaceTextureUpdated(SurfaceTexture surface) {
-            Bitmap photo = mTextureView.getBitmap();
 
+            Bitmap photo = mTextureView.getBitmap();
             int pixel = photo.getPixel(photo.getWidth() / 2, photo.getHeight() / 2);
             int redValue1 = Color.red(pixel);
             int blueValue1 = Color.blue(pixel);
             int greenValue1 = Color.green(pixel);
             int color = Color.rgb(redValue1, greenValue1, blueValue1);
+
             mPointerRingView.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-            if (color == Color.rgb(0,0,0)) {
+
+            String high = AppConfig.highPhos.get(color);
+
+            String moderate = AppConfig.lowPhos.get(color);
+
+            String adequate = AppConfig.adequatePhos.get(color);
+
+            if (high != null) {
                 Bundle colorBundle = new Bundle();
                 colorBundle.putInt(AppConfig.COLOR_RED, Color.red(color));
                 colorBundle.putInt(AppConfig.COLOR_BLUE, Color.blue(color));
                 colorBundle.putInt(AppConfig.COLOR_GREEN, Color.green(color));
+                colorBundle.putString(PHOSPHOROUS_STATE,high);
+                colorBundle.putString(PHOSPHOROUS_REC,"PHOSPHOROUS: NPK=0 KG, DAP= 0 KG ");
+                Intent resultIntent = new Intent();
+                resultIntent.putExtras(colorBundle);
+                setResult(AppConfig.PHOSPHOROUS_COLOR_CODE, resultIntent);
+                finish();
+            } else if (adequate != null) {
+                Bundle colorBundle = new Bundle();
+                colorBundle.putInt(AppConfig.COLOR_RED, Color.red(color));
+                colorBundle.putInt(AppConfig.COLOR_BLUE, Color.blue(color));
+                colorBundle.putInt(AppConfig.COLOR_GREEN, Color.green(color));
+                colorBundle.putString(PHOSPHOROUS_STATE,adequate);
+                colorBundle.putString(PHOSPHOROUS_REC,"PHOSPHOROUS: NPK=20 KG, DAP= 20 KG ");
+                Intent resultIntent = new Intent();
+                resultIntent.putExtras(colorBundle);
+                setResult(AppConfig.PHOSPHOROUS_COLOR_CODE, resultIntent);
+                finish();
+            } else if (moderate != null) {
+                Bundle colorBundle = new Bundle();
+                colorBundle.putInt(AppConfig.COLOR_RED, Color.red(color));
+                colorBundle.putInt(AppConfig.COLOR_BLUE, Color.blue(color));
+                colorBundle.putInt(AppConfig.COLOR_GREEN, Color.green(color));
+                colorBundle.putString(PHOSPHOROUS_STATE,moderate);
+                colorBundle.putString(PHOSPHOROUS_REC,"PHOSPHOROUS: NPK=20 KG, DAP= 20 KG ");
                 Intent resultIntent = new Intent();
                 resultIntent.putExtras(colorBundle);
                 setResult(AppConfig.PHOSPHOROUS_COLOR_CODE, resultIntent);

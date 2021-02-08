@@ -1,7 +1,9 @@
 package com.example.bujimuapp;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -24,8 +26,17 @@ import android.widget.Toast;
 
 import com.example.bujimuapp.models.SiteInfo;
 import com.example.bujimuapp.models.SoilAnalysis;
+import com.example.bujimuapp.ui.MainActivity;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Date;
+
+import static com.example.bujimuapp.AppConfig.NITROGEN_REC;
+import static com.example.bujimuapp.AppConfig.NITROGEN_STATE;
+import static com.example.bujimuapp.AppConfig.PHOSPHOROUS_REC;
+import static com.example.bujimuapp.AppConfig.PHOSPHOROUS_STATE;
+import static com.example.bujimuapp.AppConfig.PH_REC;
+import static com.example.bujimuapp.Constants.MYPREF;
 
 
 /**
@@ -44,6 +55,9 @@ public class SoilAnalysisFragment extends Fragment {
     private Button recommendationButton;
     private SoilAnalysis soilAnalysis;
     private SiteInfo siteInfo;
+    private String recommendation = "";
+
+    SharedPreferences pref;
 
     private SoilAnalysisViewModel soilAnalysisViewModel;
 
@@ -144,12 +158,25 @@ public class SoilAnalysisFragment extends Fragment {
         recommendationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                soilAnalysis = new SoilAnalysis(0, siteInfo, cropName,
-                        "fruits", new Date());
-                soilAnalysisViewModel.insert(soilAnalysis);
-                Toast.makeText(getActivity(), "Analysis Saved", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
+                if (recommendation.equals("")) {
+                    Toast.makeText(getActivity(), "No Analysis Done", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                pref = getContext().getSharedPreferences(MYPREF, 0);
+                long userId = pref.getLong("userId", 1);
+                soilAnalysis = new SoilAnalysis(siteInfo, cropName,
+                        recommendation, new Date(), userId);
+                new MaterialAlertDialogBuilder(getActivity()).setTitle("Fertilizer recommendation")
+                        .setMessage(recommendation)
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                soilAnalysisViewModel.insert(soilAnalysis);
+                                Toast.makeText(getActivity(), "Analysis Saved", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getActivity(), MainActivity.class);
+                                startActivity(intent);
+                            }
+                        }).show();
             }
         });
     }
@@ -167,6 +194,7 @@ public class SoilAnalysisFragment extends Fragment {
                     // TODO Update your TextView.
                     int color = Color.rgb(red, blue, green);
                     Log.d("Batman", "onActivityResult: " + Color.blue(color));
+                    recommendation += bundle.getString(NITROGEN_REC);
                     nitrogenCard.setCardBackgroundColor(color);
                     nitrogenText.setTextColor(Color.parseColor("#ffffff"));
                 } else if (resultCode == AppConfig.PHOSPHOROUS_COLOR_CODE) {
@@ -175,8 +203,8 @@ public class SoilAnalysisFragment extends Fragment {
                     int blue = bundle.getInt(AppConfig.COLOR_BLUE);
                     int green = bundle.getInt(AppConfig.COLOR_GREEN);
                     // TODO Update your TextView.
+                    recommendation += bundle.getString(PHOSPHOROUS_REC);
                     int color = Color.rgb(red, blue, green);
-                    Log.d("Batman", "onActivityResult: " + Color.blue(color));
                     phosphorousCard.setCardBackgroundColor(color);
                     phosphorousText.setTextColor(Color.parseColor("#ffffff"));
                 } else if (resultCode == AppConfig.PH_COLOR_CODE) {
@@ -185,6 +213,7 @@ public class SoilAnalysisFragment extends Fragment {
                     int blue = bundle.getInt(AppConfig.COLOR_BLUE);
                     int green = bundle.getInt(AppConfig.COLOR_GREEN);
                     // TODO Update your TextView.
+                    recommendation += bundle.getString(PH_REC);
                     int color = Color.rgb(red, blue, green);
                     Log.d("Batman", "onActivityResult: " + Color.blue(color));
                     phCard.setCardBackgroundColor(color);

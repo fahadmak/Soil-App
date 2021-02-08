@@ -1,6 +1,7 @@
 package com.example.bujimuapp.ui.dashboard;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,11 @@ import com.example.bujimuapp.BeanAgroActivity;
 import com.example.bujimuapp.MaizeAgroActivity;
 import com.example.bujimuapp.R;
 import com.example.bujimuapp.SoilAnalysisActivity;
+import com.example.bujimuapp.ui.MainActivity;
+import com.example.bujimuapp.ui.SoilActivity;
+
+import static com.example.bujimuapp.Constants.EMAIL;
+import static com.example.bujimuapp.Constants.MYPREF;
 
 public class DashboardFragment extends Fragment {
 
@@ -64,6 +70,16 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MaizeAgroActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        view.findViewById(R.id.logout_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences preferences = getActivity().getSharedPreferences(MYPREF, 0);
+                preferences.edit().clear().commit();
+                Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
             }
         });

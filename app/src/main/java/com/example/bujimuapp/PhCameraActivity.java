@@ -41,6 +41,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import static com.example.bujimuapp.AppConfig.PHOSPHOROUS_REC;
+import static com.example.bujimuapp.AppConfig.PHOSPHOROUS_STATE;
+import static com.example.bujimuapp.AppConfig.PH_REC;
+
 public class PhCameraActivity extends AppCompatActivity {
 
     private static final int REQUEST_CAMERA_PERMISSION_RESULT = 0;
@@ -89,11 +93,42 @@ public class PhCameraActivity extends AppCompatActivity {
             int greenValue1 = Color.green(pixel);
             int color = Color.rgb(redValue1, greenValue1, blueValue1);
             mPointerRingView.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-            if (color == Color.rgb(0,0,0)) {
+
+            String high = AppConfig.highPhos.get(color);
+
+            String moderate = AppConfig.lowPhos.get(color);
+
+            String adequate = AppConfig.adequatePhos.get(color);
+
+            if (high != null) {
                 Bundle colorBundle = new Bundle();
                 colorBundle.putInt(AppConfig.COLOR_RED, Color.red(color));
                 colorBundle.putInt(AppConfig.COLOR_BLUE, Color.blue(color));
                 colorBundle.putInt(AppConfig.COLOR_GREEN, Color.green(color));
+                colorBundle.putString(PHOSPHOROUS_STATE,high);
+                colorBundle.putString(PH_REC,"PH: AGRIC LIME: 40kg ");
+                Intent resultIntent = new Intent();
+                resultIntent.putExtras(colorBundle);
+                setResult(AppConfig.PH_COLOR_CODE, resultIntent);
+                finish();
+            } else if (adequate != null) {
+                Bundle colorBundle = new Bundle();
+                colorBundle.putInt(AppConfig.COLOR_RED, Color.red(color));
+                colorBundle.putInt(AppConfig.COLOR_BLUE, Color.blue(color));
+                colorBundle.putInt(AppConfig.COLOR_GREEN, Color.green(color));
+                colorBundle.putString(PHOSPHOROUS_STATE,adequate);
+                colorBundle.putString(PH_REC,"PH: AGRIC LIME: 0 kg ");
+                Intent resultIntent = new Intent();
+                resultIntent.putExtras(colorBundle);
+                setResult(AppConfig.PH_COLOR_CODE, resultIntent);
+                finish();
+            } else if (moderate != null) {
+                Bundle colorBundle = new Bundle();
+                colorBundle.putInt(AppConfig.COLOR_RED, Color.red(color));
+                colorBundle.putInt(AppConfig.COLOR_BLUE, Color.blue(color));
+                colorBundle.putInt(AppConfig.COLOR_GREEN, Color.green(color));
+                colorBundle.putString(PHOSPHOROUS_STATE,moderate);
+                colorBundle.putString(PH_REC,"PH: AGRIC LIME: 0 kg ");
                 Intent resultIntent = new Intent();
                 resultIntent.putExtras(colorBundle);
                 setResult(AppConfig.PH_COLOR_CODE, resultIntent);

@@ -1,5 +1,6 @@
 package com.example.bujimuapp.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,6 +40,19 @@ public class HomeFragment extends Fragment {
                 Log.d("Soil Analysis", "onChanged: " + soilAnalyses);
             }
         });
+        adapter.setOnItemClickListener(new SoilAnalysisListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(SoilAnalysis soilAnalysis) {
+                Intent intent = new Intent(getActivity(), FarmDetailActivity.class);
+                intent.putExtra("site_info", soilAnalysis.getSiteInfo());
+                intent.putExtra("recommendation", soilAnalysis.getRecommendation());
+                intent.putExtra("date", soilAnalysis.getDate());
+                intent.putExtra("crop_grown", soilAnalysis.getCropGrown());
+                startActivity(intent);
+            }
+        }
+
+        );
         return root;
     }
 }

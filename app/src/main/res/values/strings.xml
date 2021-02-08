@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name">Bujimu App</string>
-    <string name="title_home">Home</string>
+    <string name="title_home">Suppliers Information</string>
+    <string name="title_records">Recent Analysis</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="records">Records</string>
     <string name="app_label">Bujimu</string>
+    <string name="registration">Registration</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="email">Email</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -42,6 +48,10 @@
     <string name="available_fertilizers"><u>Available Fertilizers</u></string>
     <string name="unit_price_50_kg"><u>Unit price @ 50 kg</u></string>
     <string name="_150_000_ugx">150,000 UGX</string>
+    <string name="farm_info">Farm Information</string>
+    <string name="site_infor">Site Information</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="username">User Name</string>
 
     <string-array name="sample_area">
         <item>0.5 – 1.0</item>

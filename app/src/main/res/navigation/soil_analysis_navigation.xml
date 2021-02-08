@@ -7,8 +7,8 @@
     <fragment
         android:id="@+id/farmInfo"
         android:name="com.example.bujimuapp.FarmInfoFragment"
-        tools:layout="@layout/fragment_farm_info"
-        android:label="fragment_farm_info">
+        android:label="@string/farm_info"
+        tools:layout="@layout/fragment_farm_info">
         <action
             android:id="@+id/action_farmInfo_to_siteInfo3"
             app:destination="@id/siteInfo3" />
@@ -16,8 +16,8 @@
     <fragment
         android:id="@+id/siteInfo3"
         android:name="com.example.bujimuapp.SiteInfoFragment"
-        tools:layout="@layout/fragment_site_info2"
-        android:label="fragment_site_info2">
+        android:label="Site Information"
+        tools:layout="@layout/fragment_site_info2">
         <argument
             android:name="farmInfo"
             app:argType="com.example.bujimuapp.models.FarmInfo" />
@@ -28,8 +28,7 @@
     <fragment
         android:id="@+id/siteHistory"
         android:name="com.example.bujimuapp.SiteHistoryFragment"
-        tools:layout="@layout/fragment_site_history"
-        android:label="fragment_site_history">
+        android:label="Site History">
         <argument
             android:name="site info"
             app:argType="com.example.bujimuapp.models.SiteInfo" />
@@ -37,8 +36,8 @@
     <fragment
         android:id="@+id/soilAnalysis"
         android:name="com.example.bujimuapp.SoilAnalysisFragment"
-        tools:layout="@layout/fragment_soil_analysis"
-        android:label="fragment_soil_analysis">
+        android:label="Soil Analysis"
+        tools:layout="@layout/fragment_soil_analysis">
         <action
             android:id="@+id/action_soilAnalysis_to_navigation_dashboard"
             app:popUpTo="@+id/navigation_dashboard" />

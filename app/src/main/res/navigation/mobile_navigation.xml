@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_dashboard">
+    app:startDestination="@id/navigation_dashboard">
 
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.bujimuapp.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        android:label="@string/title_records"
         tools:layout="@layout/fragment_home" />
 
     <fragment
@@ -20,6 +20,6 @@
     <fragment
         android:id="@+id/records"
         android:name="com.example.bujimuapp.ui.suppliers.SuppliersFragment"
-        android:label="@string/records"
+        android:label="@string/title_home"
         tools:layout="@layout/fragment_suppliers" />
 </navigation>

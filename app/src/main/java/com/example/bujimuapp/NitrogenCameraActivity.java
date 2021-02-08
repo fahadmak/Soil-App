@@ -40,7 +40,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.example.bujimuapp.AppConfig.NITROGEN_REC;
+import static com.example.bujimuapp.AppConfig.NITROGEN_STATE;
+import static com.example.bujimuapp.AppConfig.PHOSPHOROUS_REC;
+import static com.example.bujimuapp.AppConfig.PHOSPHOROUS_STATE;
+import static com.example.bujimuapp.AppConfig.adequatePhosphorous;
+import static com.example.bujimuapp.AppConfig.inAdequateNitrogen;
 
 public class NitrogenCameraActivity extends AppCompatActivity {
 
@@ -53,6 +62,7 @@ public class NitrogenCameraActivity extends AppCompatActivity {
     private Bitmap bitmap;
     private Size mImageSize;
     private ImageReader mImageReader;
+
     private ImageReader.OnImageAvailableListener onImageAvailableListener = new
             ImageReader.OnImageAvailableListener() {
                 @Override
@@ -90,11 +100,41 @@ public class NitrogenCameraActivity extends AppCompatActivity {
             int greenValue1 = Color.green(pixel);
             int color = Color.rgb(redValue1, greenValue1, blueValue1);
             mPointerRingView.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-            if (color == Color.rgb(0,0,0)) {
+            String noNitrogen = AppConfig.noNitro.get(color);
+
+            String inAdequate = AppConfig.inAdequateNitro.get(color);
+
+            String adequate = AppConfig.adequateNiTro.get(color);
+
+            if (noNitrogen != null) {
                 Bundle colorBundle = new Bundle();
                 colorBundle.putInt(AppConfig.COLOR_RED, Color.red(color));
                 colorBundle.putInt(AppConfig.COLOR_BLUE, Color.blue(color));
                 colorBundle.putInt(AppConfig.COLOR_GREEN, Color.green(color));
+                colorBundle.putString(NITROGEN_STATE,noNitrogen);
+                colorBundle.putString(NITROGEN_REC,"NITROGEN: UREA = 20 KG, NPK = 40 KG ");
+                Intent resultIntent = new Intent();
+                resultIntent.putExtras(colorBundle);
+                setResult(AppConfig.NITROGEN_COLOR_CODE, resultIntent);
+                finish();
+            } else if (inAdequate != null) {
+                Bundle colorBundle = new Bundle();
+                colorBundle.putInt(AppConfig.COLOR_RED, Color.red(color));
+                colorBundle.putInt(AppConfig.COLOR_BLUE, Color.blue(color));
+                colorBundle.putInt(AppConfig.COLOR_GREEN, Color.green(color));
+                colorBundle.putString(NITROGEN_STATE,inAdequate);
+                colorBundle.putString(NITROGEN_REC,"NITROGEN: UREA = 10 KG, NPK= 20 KG ");
+                Intent resultIntent = new Intent();
+                resultIntent.putExtras(colorBundle);
+                setResult(AppConfig.NITROGEN_COLOR_CODE, resultIntent);
+                finish();
+            } else if (adequate != null) {
+                Bundle colorBundle = new Bundle();
+                colorBundle.putInt(AppConfig.COLOR_RED, Color.red(color));
+                colorBundle.putInt(AppConfig.COLOR_BLUE, Color.blue(color));
+                colorBundle.putInt(AppConfig.COLOR_GREEN, Color.green(color));
+                colorBundle.putString(NITROGEN_STATE,adequate);
+                colorBundle.putString(NITROGEN_REC,"NITROGEN: UREA = 0 KG, NPK = 0 KG ");
                 Intent resultIntent = new Intent();
                 resultIntent.putExtras(colorBundle);
                 setResult(AppConfig.NITROGEN_COLOR_CODE, resultIntent);
